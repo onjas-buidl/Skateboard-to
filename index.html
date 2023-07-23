@@ -24,5 +24,25 @@
         <button id="submit">Submit</button>
     </div>
 </div>
+<div id="loading" class="loading hidden">
+    <div class="spinner"></div>
+</div>
+<script>
+    document.getElementById("submit").addEventListener("click", function() {
+        var loading = document.getElementById('loading');
+        var inputDiv = document.querySelector('.input-div'); // Add this line
+        loading.classList.remove("hidden");
+        setTimeout(function() {
+            loading.classList.add("hidden");
+            var aLink = document.createElement('a');
+            aLink.href = "https://github.com/stefanrmmr/GPT_email_generator/commit/3abe13dab7f3902406e1ee8172249ac0278eeb03";
+            aLink.innerText = "Click here to access your updated repo";
+            aLink.className = "links";
+            document.body.appendChild(aLink);
+            document.querySelector(".links").style.display = "block";
+            inputDiv.remove(); // Add this line
+        }, 5000);
+    });
+</script>
 </body>
 </html>
