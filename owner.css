@@ -1,0 +1,97 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.navbar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.navbar img {
+    width: 50px;
+    height: 50px;
+}
+
+.navbar .title {
+    color: white;
+    margin-left: 10px;
+    font-size: 1.2rem;
+}
+
+.navbar .subtitle {
+    color: #888888;
+    font-size: 1.2rem;
+}
+
+.main h1 {
+    text-align: center;
+    font-size: 7rem;
+    font-weight: 900;
+}
+
+#gradient1, #gradient2 {
+    background: linear-gradient(90deg, #7fd0de, #82c673);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.main p {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.input-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid;
+    border-image: linear-gradient(90deg, #7fd0de, #82c673) 1;
+    padding-left: 10px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 20px 10px rgba(127,208,222,0.2),
+    0 0 30px 15px rgba(130,198,115,0.2);
+}
+
+.input-div input {
+    font-size: 30px;
+    width: 75%;
+    margin-right: 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.input-div button {
+    background-color: black;
+    border: none;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    height: 60px;
+    width: 25%;
+    padding: 0;
+    font-size: 25px;
+}
+
+.input-div button:hover {
+    background: linear-gradient(90deg, #7fd0de, #82c673);
+    -webkit-background-clip: padding-box;
+    transition: all 0.5s ease;
+}
