@@ -96,3 +96,36 @@ button:hover {
     -webkit-background-clip: padding-box;
     transition: all 0.5s ease;
 }
+
+
+
+
+.loading {
+    position: fixed;
+    background: black;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.spinner {
+    width: 200px;
+    height: 200px;
+    border: 16px solid #f3f3f3; /* Light grey */
+    /*border-top: 16px solid #3498db; !* Blue *!*/
+    border-image: linear-gradient(90deg, #7fd0de, #82c673) 1;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
