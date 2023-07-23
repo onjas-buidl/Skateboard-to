@@ -1,0 +1,53 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main h1 {
+    text-align: center;
+    font-size: 7rem;
+}
+
+#gradient1, #gradient2 {
+    background: linear-gradient(90deg, #7fd0de, #82c673);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.main p {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.input-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid;
+    border-image: linear-gradient(90deg, #7fd0de, #82c673) 1;
+    padding: 10px;
+    width: 600px;
+}
+
+.input-div input {
+    font-size: 30px;
+    width: 80%;
+}
+
+.input-div button {
+    background-color: transparent;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.input-div button:hover {
+    background: linear-gradient(90deg, #7fd0de, #82c673);
+}
