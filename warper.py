@@ -8,7 +8,7 @@ import yaml
 # 1. Load config and Define the local directory
 with open('config.yaml', 'r') as file:
     config = yaml.safe_load(file)
-    
+
 repo_URL = config['config']['repo_URL']
 repo_name = repo_URL.split("/")[-1]
 base_dir = os.getcwd()
@@ -44,11 +44,13 @@ def extract_code_segments(text):
         raise Exception("No code segments found in the text.")
     return code_segments
 
+
 def detect_openai_api(code_segment):
     if "openai" in code_segment.lower():
         return True
     else:
         return False
+
 
 def update_file_with_llm(file_path):
     """
