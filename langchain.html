@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skateboard Pirate</title>
+    <link rel="stylesheet" type="text/css" href="enduser.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="navbar">
+    <img src="logo.png" alt="logo">
+    <span class="title">Skateboard &nbsp;</span>
+    <span class="subtitle">Frictionless API Onboarding</span>
+</div>
+<div class="main">
+    <h1 style="margin-bottom: 0; margin-top: 0">Switch To <span id="gradient1">LangChain</span></h1>
+    <h1 style="margin-top: 10px;">In <span id="gradient2">One Click</span></h1>
+    <p style="color: #888888;">Our AI onboarding agent will create a PR on your repo to use LangChain</p>
+    <br/>
+    <div class="input-div">
+        <input type="text" placeholder="Your repo link..." required>
+        <button id="submit">Submit</button>
+    </div>
+</div>
+<div id="loading" class="loading hidden">
+    <div class="spinner"></div>
+</div>
+<script>
+    document.getElementById("submit").addEventListener("click", function() {
+        var loading = document.getElementById('loading');
+        var inputDiv = document.querySelector('.input-div'); // Add this line
+        loading.classList.remove("hidden");
+        setTimeout(function() {
+            loading.classList.add("hidden");
+            var aLink = document.createElement('a');
+            aLink.href = "https://github.com/onjas-buidl/GPT_email_generator/tree/Skateboard-LangChain_update";
+            aLink.innerText = "Click here to access your updated repo";
+            aLink.className = "links";
+            document.body.appendChild(aLink);
+            document.querySelector(".links").style.display = "block";
+            inputDiv.remove(); // Add this line
+        }, 60000);
+    });
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Skateboard Pirate</title>
-    <link rel="stylesheet" type="text/css" href="enduser.css">
+    <link rel="stylesheet" type="text/css" href="owner.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
@@ -15,34 +15,34 @@
     <span class="subtitle">Frictionless API Onboarding</span>
 </div>
 <div class="main">
-    <h1 style="margin-bottom: 0; margin-top: 0">Switch To <span id="gradient1">LangChain</span></h1>
-    <h1 style="margin-top: 10px;">In <span id="gradient2">One Click</span></h1>
-    <p style="color: #888888;">Our AI onboarding agent will create a PR on your repo to use LangChain</p>
+    <h1 style="margin-bottom: 0; margin-top: 0">Frictionless API Onboarding</h1>
+    <h1 style="margin-top: 10px; margin-bottom: 30px;">Just Add <span id="gradient2">Docs</span></h1>
+    <p style="color: #888888; width: 80%; margin-left: auto; margin-right: auto">Our AI reads your docs, reads your user's codebase, and automatically onboards them through a PR integrating your API.</p>
     <br/>
     <div class="input-div">
         <input type="text" placeholder="Your repo link..." required>
-        <button id="submit">Submit</button>
+    </div>
+    <br/><br/>
+    <div class="input-div">
+        <input type="text" placeholder="Anything else for the AI agent..." required>
+    </div>
+    <div style="width: 200px; margin-left: auto; margin-right: auto; margin-top: 50px;">
+        <button id="submit" onclick="delayRedirect()">Submit</button>
     </div>
 </div>
 <div id="loading" class="loading hidden">
     <div class="spinner"></div>
 </div>
-<script>
-    document.getElementById("submit").addEventListener("click", function() {
+<script type="text/javascript">
+    function delayRedirect() {
         var loading = document.getElementById('loading');
-        var inputDiv = document.querySelector('.input-div'); // Add this line
-        loading.classList.remove("hidden");
+        loading.classList.remove('hidden'); // Show loading icon
+
         setTimeout(function() {
-            loading.classList.add("hidden");
-            var aLink = document.createElement('a');
-            aLink.href = "https://github.com/onjas-buidl/GPT_email_generator/tree/Skateboard-LangChain_update";
-            aLink.innerText = "Click here to access your updated repo";
-            aLink.className = "links";
-            document.body.appendChild(aLink);
-            document.querySelector(".links").style.display = "block";
-            inputDiv.remove(); // Add this line
-        }, 60000);
-    });
+            loading.classList.add('hidden'); // Hide loading icon
+            window.location.href = "langchain.html";
+        }, 10000);
+    }
 </script>
 </body>
 </html>
