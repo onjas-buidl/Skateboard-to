@@ -1,18 +1,21 @@
 import os
-import git
 import re
 from git import Repo
 import openai
+import yaml
 
-# Define the local directory
-repo_URL = "https://github.com/onjas-buidl/GPT_email_generator"
+
+# 1. Load config and Define the local directory
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
+    
+repo_URL = config['config']['repo_URL']
+repo_name = repo_URL.split("/")[-1]
 base_dir = os.getcwd()
 
+# 2. Create new folder based on repo_name and clone the repo
+target_repo_dir = os.path.join(base_dir, "output", repo_name)
 
-
-repo_name = repo_URL.split("/")[-1]
-# Create new folder based on repo_name
-target_repo_dir = os.path.join(base_dir, repo_name)
 if os.path.exists(target_repo_dir) and os.listdir(target_repo_dir):
     print('This repo already exists and we delete it for demo purpose.')
     import shutil
@@ -22,15 +25,13 @@ else:
 
 Repo.clone_from(repo_URL, target_repo_dir)
 print('Cloned the repo successfully. {} is created.'.format(target_repo_dir))
-# Change the working directory to the local directory
+
+# 3. Change the working directory to the local directory and Pull the latest codebase from GitHub
 os.chdir(target_repo_dir)
 repo = Repo(target_repo_dir)
-
-# Pull the latest codebase from GitHub
 origin = repo.remotes.origin
 origin.pull()
 
-os.chdir(base_dir)
 #
 # # Read sample_prompt_file.txt as string
 # with open('sample_prompt_file.txt', 'r') as file:
@@ -124,7 +125,7 @@ Both code snippets assume that there is an OPENAI_API_KEY environmental variable
     return True
 
 
-# Load all .py files in local_dir separately
+# 4. Load all .py files in local_dir separately and update the codebase with the new code
 for root, dirs, files in os.walk(target_repo_dir):
     # print(root, '===', dirs,'===', files)
     for file in files:
@@ -135,9 +136,7 @@ for root, dirs, files in os.walk(target_repo_dir):
                 print("Updated file: {}".format(file_path))
 
 
-# Commit the changes with a relevant message
+# 5. Commit the changes with a relevant message and push the changes to Github
 repo.git.add(update=True)
 repo.index.commit("CodeWarp: Update codebase to LangChain.")
-
-# Push the changes to Github
 origin.push()
