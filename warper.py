@@ -65,8 +65,10 @@ def update_file_with_llm(file_path):
     if not detect_openai_api(codebase):
         return False
 
+    print("Updating the file: {}".format(file_path))
+
     respnose = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a Python code editor that reformat code, changing from OpenAI API to Langchain API."},
             {'role': 'user', "content": """This is usually how to call OpenAI API
@@ -100,8 +102,8 @@ llm = ChatOpenAI(model_name='gpt-4')
 messages = [
     SystemMessage(content="You are a helpful assistant."),
     HumanMessage(content="Who won the world series in 2020?"),
-		AIMessage(content="The Los Angeles Dodgers won the World Series in 2020."),
-		HumanMessage(content="Where was it played?")
+    AIMessage(content="The Los Angeles Dodgers won the World Series in 2020."),
+    HumanMessage(content="Where was it played?")
 ]
 response = llm(messages)
 
@@ -127,8 +129,9 @@ Both code snippets assume that there is an OPENAI_API_KEY environmental variable
     return True
 
 
+import tqdm
 # 4. Load all .py files in local_dir separately and update the codebase with the new code
-for root, dirs, files in os.walk(target_repo_dir):
+for root, dirs, files in tqdm.tqdm(os.walk(target_repo_dir)):
     # print(root, '===', dirs,'===', files)
     for file in files:
         if file.endswith('.py'):
@@ -140,5 +143,14 @@ for root, dirs, files in os.walk(target_repo_dir):
 
 # 5. Commit the changes with a relevant message and push the changes to Github
 repo.git.add(update=True)
-repo.index.commit("CodeWarp: Update codebase to LangChain.")
+repo.index.commit("Skateboard: Update codebase to LangChain.")
+
+new_branch_name = 'Skateboard-LangChain_update' 
+
+
+# Create a new branch
+repo.git.checkout('HEAD', b=new_branch_name)
+# Push the new branch to the remote repository
+repo.git.push('--set-upstream', 'origin', new_branch_name)
+
 origin.push()
