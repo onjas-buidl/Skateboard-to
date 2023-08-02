@@ -69,6 +69,7 @@ def update_file_with_llm(file_path):
 
     respnose = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
+        temperature=0,
         messages=[
             {"role": "system", "content": "You are a Python code editor that reformat code, changing from OpenAI API to Langchain API."},
             {'role': 'user', "content": """This is usually how to call OpenAI API
