@@ -14,8 +14,10 @@ repo_name = repo_URL.split("/")[-1]
 base_dir = os.getcwd()
 
 # 2. Create new folder based on repo_name and clone the repo
-target_repo_dir = os.path.join(base_dir, "output", repo_name)
+source_repo_dir = os.path.join(base_dir, "repo_raw", repo_name)
+target_repo_dir = os.path.join(base_dir, "repo_skated", repo_name)
 
+# detect if the source repo already exists
 if os.path.exists(target_repo_dir) and os.listdir(target_repo_dir):
     print('This repo already exists and we delete it for demo purpose.')
     import shutil
@@ -23,7 +25,7 @@ if os.path.exists(target_repo_dir) and os.listdir(target_repo_dir):
 else:
     os.makedirs(target_repo_dir, exist_ok=True)
 
-Repo.clone_from(repo_URL, target_repo_dir)
+Repo.clone_from(repo_URL, source_repo_dir)
 print('Cloned the repo successfully. {} is created.'.format(target_repo_dir))
 
 # 3. Change the working directory to the local directory and Pull the latest codebase from GitHub
@@ -32,11 +34,7 @@ repo = Repo(target_repo_dir)
 origin = repo.remotes.origin
 origin.pull()
 
-#
-# # Read sample_prompt_file.txt as string
-# with open('sample_prompt_file.txt', 'r') as file:
-#     sample_prompt = file.read()
-
+# %%
 
 def extract_code_segments(text):
     code_segments = re.findall(r"```(?:Python|python)?\s*([\s\S]*?)```", text)
@@ -91,6 +89,31 @@ print(response['choices'][0]['message']['content'])
 # print result: The 2020 World Series was played at the Globe Life Field in Arlington, Texas.
 ```
 
+sample format for the response object:
+```json
+{
+  "id": "chatcmpl-7k5fbq8QDmPg7vR9T0oHkAGl8aw85",
+  "object": "chat.completion",
+  "created": 1691219239,
+  "model": "gpt-4-0613",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The 2020 World Series was played at Globe Life Field in Arlington, Texas, USA."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 53,
+    "completion_tokens": 19,
+    "total_tokens": 72
+  }
+}
+```
+
 This is an example of calling chat models with OpenAI API in LangChain, performing the same utility. 
 
 ```python
@@ -111,6 +134,9 @@ response = llm(messages)
 # response: AIMessage(content='The 2020 World Series was played at Globe Life Field in Arlington, Texas.', additional_kwargs={}, example=False)
 # to print the result, use `print(response.content)`
 ```
+
+`{"role": "user", "content": "Who won the world series in 2020?"}` corresponds to  `HumanMessage(content="Who won the world series in 2020?")`
+`{"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."}` corresponds to `AIMessage(content="The Los Angeles Dodgers won the World Series in 2020.")`
 
 Both code snippets assume that there is an OPENAI_API_KEY environmental variable. If the key is set in other ways, make sure to set `os.environ["OPENAI_API_KEY"] = "whatever key format the codebase is using"`"""},
             {"role": "assistant", "content": "Understand, I will reformat a file from OpenAI API to LangChain. Please send me the file content to reformat."},
@@ -146,7 +172,15 @@ for root, dirs, files in tqdm.tqdm(os.walk(target_repo_dir)):
 repo.git.add(update=True)
 repo.index.commit("Skateboard: Update codebase to LangChain.")
 
-new_branch_name = 'Skateboard-LangChain_update' 
+import random
+
+# Generate a random integer between 0 and 999999
+number = random.randint(0, 999999)
+
+# Convert to string and pad with zeroes if necessary
+random_string = str(number).zfill(6)
+
+new_branch_name = 'Skateboard-LangChain_update'
 
 
 # Create a new branch
