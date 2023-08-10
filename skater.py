@@ -132,13 +132,11 @@ Both code snippets assume that there is an OPENAI_API_KEY environmental variable
 
     output = response['choices'][0]['message']['content']
 
-    cleaned_file_content = extract_code_segments(output)[0]
+    updated_file_content = extract_code_segments(output)[0]
 
-    # Update the codebase with the new code
-    with open(file_path, 'w') as file:
-        file.write(cleaned_file_content)
 
-    return True
+
+    return updated_file_content
 
 
 
@@ -160,5 +158,8 @@ else:
     for file_path in tqdm.tqdm(files_paths_to_update):
         with open(file_path, 'r') as file:
             file_content = file.read()
-        update_file_with_llm(file_content)
+        updated_file_content = update_file_with_llm(file_content)
+        # Update the codebase with the new code
+        with open(file_path, 'w') as file:
+            file.write(updated_file_content)
         print("Updated file: {}".format(file_path))
