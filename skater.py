@@ -6,8 +6,11 @@ import yaml
 import tqdm
 
 # 1. Load config and Define the local directory
-
 USE_SEPARATE_REPO = True
+AUTOMATIC_SEARCH_FILE_TO_UPDATE = True
+
+
+
 if USE_SEPARATE_REPO:
     with open('config.yaml', 'r') as file:
         config = yaml.safe_load(file)
@@ -45,7 +48,7 @@ def update_file_with_llm(file_content):
     """
     # Load the codebase into a variable
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo-16k",
         temperature=0,
         messages=[
             {"role": "system",
@@ -138,7 +141,7 @@ Both code snippets assume that there is an OPENAI_API_KEY environmental variable
     return True
 
 
-AUTOMATIC_SEARCH_FILE_TO_UPDATE = False
+
 if AUTOMATIC_SEARCH_FILE_TO_UPDATE:
     for root, dirs, files in tqdm.tqdm(os.walk(target_repo_dir)):
         # print(root, '===', dirs,'===', files)
