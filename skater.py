@@ -10,7 +10,6 @@ USE_SEPARATE_REPO = True
 AUTOMATIC_SEARCH_FILE_TO_UPDATE = True
 
 
-
 if USE_SEPARATE_REPO:
     with open('config.yaml', 'r') as file:
         config = yaml.safe_load(file)
@@ -139,7 +138,7 @@ Both code snippets assume that there is an OPENAI_API_KEY environmental variable
     return updated_file_content
 
 
-
+AUTOMATIC_SEARCH_FILE_TO_UPDATE=False
 if AUTOMATIC_SEARCH_FILE_TO_UPDATE:
     for root, dirs, files in tqdm.tqdm(os.walk(target_repo_dir)):
         # print(root, '===', dirs,'===', files)
@@ -153,8 +152,7 @@ if AUTOMATIC_SEARCH_FILE_TO_UPDATE:
                 update_file_with_llm(file_content)
                 print("Updated file: {}".format(file))
 else:
-    files_paths_to_update = ['/Users/jasonhu/Desktop/aider/aider/sendchat.py',
-                             '/Users/jasonhu/Desktop/aider/aider/main.py']
+    files_paths_to_update = ['eval/score.py']
     for file_path in tqdm.tqdm(files_paths_to_update):
         with open(file_path, 'r') as file:
             file_content = file.read()
