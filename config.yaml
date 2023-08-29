@@ -1,2 +1,3 @@
 config:
   repo_URL: 'https://github.com/onjas-buidl/GPT_email_generator'
+  repo_path: '/Users/jasonhu/Desktop/Alpaca-CoT'
